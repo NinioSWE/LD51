@@ -22,7 +22,9 @@ namespace LD51
         Texture2D littleStar;
         Texture2D middelStar;
         Texture2D bigStar;
-        int speed = 1;
+
+        Vector2 offset;
+        float speed = 200;
 
 
         public BackgroundStars(MonoGameSetup game)
@@ -31,6 +33,7 @@ namespace LD51
             littleStar = new Texture2D(game.GraphicsDevice, 1, 1);
             middelStar = new Texture2D(game.GraphicsDevice, 2, 2);
             bigStar = new Texture2D(game.GraphicsDevice, 3, 3);
+            offset = Vector2.Zero;
 
             littleStar.SetData(new Color[] { 
                 Color.White 
@@ -72,19 +75,9 @@ namespace LD51
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (var starPosition in littleStarPositions)
+            for (int i = 0; i < littleStarAmount; i++)
             {
-                spriteBatch.Draw(littleStar, new Rectangle(starPosition.ToPoint() + movement, littleStar.Bounds.Size * new Point(4,4)), Color.White); 
-            }
-
-            foreach (var starPosition in middelStarPositions)
-            {
-                spriteBatch.Draw(middelStar, new Rectangle(starPosition.ToPoint() + movement, littleStar.Bounds.Size * new Point(4, 4)), Color.White);
-            }
-
-            foreach (var starPosition in bigStarPositions)
-            {
-                spriteBatch.Draw(bigStar, new Rectangle(starPosition.ToPoint() + movement, littleStar.Bounds.Size * new Point(4, 4)), Color.White);
+                spriteBatch.Draw(littleStar, littleStarPositions[i], Color.White); 
             }
         }
 
@@ -96,6 +89,15 @@ namespace LD51
         public void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            for (int i = 0; i < littleStarAmount; i++)
+            {
+                littleStarPositions[i].X -= deltaTime * speed;
+                if (littleStarPositions[i].X < 0)
+                {
+                    littleStarPositions[i].X = Settings.windowWidth;
+                }
+            }
         }
     }
 }

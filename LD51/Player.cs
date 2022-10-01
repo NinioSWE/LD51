@@ -20,6 +20,7 @@ namespace LD51
         {
             this.game = game;
             this.playerAnimation = playerAnimation;
+            this.pos = new Vector2(Settings.windowWidth/4, Settings.windowHeight/2);
             LoadContent();
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
