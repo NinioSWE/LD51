@@ -49,7 +49,8 @@ namespace LD51
                 animationFrame++;
                 if (animationFrame == totalAnimationFrames)
                 {
-                    animationFrame = 0;
+                    animationFrame = totalAnimationFrames - 1;
+                    this.game.isPlaying = false;
                 }
                 tempTimer = 0;
             }

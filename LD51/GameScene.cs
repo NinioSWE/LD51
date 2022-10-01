@@ -27,12 +27,12 @@ namespace LD51
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             backgroundStar.Draw(gameTime, spriteBatch);
-            player.Draw(gameTime, spriteBatch);
 
             foreach (Airplane airplane in airplanes)
             {
                 airplane.Draw(gameTime, spriteBatch);
             }
+            player.Draw(gameTime, spriteBatch);
         }
 
         public void LoadContent()

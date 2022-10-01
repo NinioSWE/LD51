@@ -7,10 +7,12 @@ namespace LD51
 {
     public class MonoGameSetup : Game
     {
+        public bool isPlaying = true;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameScene gameScene;
-        private bool isPlaying = true;
+        
         public MonoGameSetup()
         {
             _graphics = new GraphicsDeviceManager(this);
