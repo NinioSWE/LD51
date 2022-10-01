@@ -10,7 +10,7 @@ namespace LD51
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameScene gameScene;
-
+        private bool isPlaying = true;
         public MonoGameSetup()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -44,7 +44,11 @@ namespace LD51
                 Exit();
 
             // TODO: Add your update logic here
-            gameScene.Update(gameTime);
+
+            if (isPlaying)
+            {
+                gameScene.Update(gameTime);
+            }
             base.Update(gameTime);
         }
 

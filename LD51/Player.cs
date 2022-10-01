@@ -21,6 +21,7 @@ namespace LD51
         private bool isSpaceDown = false;
         private Rectangle hitbox;
         public int seenWidth;
+        private Explosion explosion;
 
         public Player(MonoGameSetup game, PlayerAnimation playerAnimation)
         {
@@ -43,6 +44,12 @@ namespace LD51
             {
                 gift.Draw(gameTime, spriteBatch);
             }
+
+            if (this.explosion != null)
+            {
+                this.explosion.Draw(gameTime, spriteBatch);
+            }
+
         }
 
         public void LoadContent()
@@ -58,12 +65,23 @@ namespace LD51
             this.MoveCharacter(state, deltaTime);
             this.KeepOnScreen();
             this.DropGift(state);
+            if (this.explosion != null)
+            {
+                this.explosion.Update(gameTime);
+            }
 
             foreach (Gift gift in gifts)
             {
                 gift.Update(gameTime);
             }
             this.removeGifts();
+        }
+
+        public void Die()
+        {
+            if (this.explosion == null) {
+                this.explosion = new Explosion(this.game, new Vector2(this.pos.X + this.seenWidth / 2 - 128, this.pos.Y + this.characterSprite.Height / 2 - 128));
+            }
         }
 
         private void MoveCharacter(KeyboardState state, float deltaTime)
