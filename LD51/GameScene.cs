@@ -53,7 +53,7 @@ namespace LD51
 
                 if (airplane.GetHitBox().Intersects(playerHitBox))
                 {
-                    this.player.pos.X = -200;
+                    this.player.Die();
                 }
             }
 

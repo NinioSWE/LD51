@@ -66,6 +66,11 @@ namespace LD51
             this.removeGifts();
         }
 
+        public void Die()
+        {
+            new Explosion(this.game, new Vector2(this.pos.X + this.seenWidth / 2 - 128, this.pos.Y + this.characterSprite.Height / 2 - 128));
+        }
+
         private void MoveCharacter(KeyboardState state, float deltaTime)
         {
             if (state.IsKeyDown(Keys.W))
