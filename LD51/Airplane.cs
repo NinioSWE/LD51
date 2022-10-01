@@ -26,6 +26,12 @@ namespace LD51
         {
             return airplaneSprite.Width;
         }
+        
+        public Rectangle GetHitBox()
+        {
+            
+            return new Rectangle(pos.ToPoint(), new Vector2(airplaneSprite.Width, airplaneSprite.Height).ToPoint());
+        }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

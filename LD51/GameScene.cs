@@ -46,9 +46,15 @@ namespace LD51
             spawnTimer -= 0.0001F;
             spawnTempTimer++;
 
+            var playerHitBox = new Rectangle(this.player.pos.ToPoint(), new Vector2(this.player.seenWidth, this.player.characterSprite.Height).ToPoint());
             foreach (Airplane airplane in airplanes)
             {
                 airplane.Update(gameTime);
+
+                if (airplane.GetHitBox().Intersects(playerHitBox))
+                {
+                    this.player.pos.X = -200;
+                }
             }
 
             if (spawnTempTimer / 60 >= spawnTimer)
@@ -57,6 +63,7 @@ namespace LD51
                 spawnTempTimer = 0;
             }
             this.removeAirplanes();
+
         }
 
         private void spawnAirplane()

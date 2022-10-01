@@ -13,13 +13,14 @@ namespace LD51
         private PlayerAnimation playerAnimation;
         public Texture2D characterSprite;
 
-        private Vector2 pos;
+        public Vector2 pos;
         private Vector2 velocity;
         private float maxVelocity = 300;
         private float movement = 60;
         private List<Gift> gifts = new List<Gift>();
         private bool isSpaceDown = false;
         private Rectangle hitbox;
+        public int seenWidth;
 
         public Player(MonoGameSetup game, PlayerAnimation playerAnimation)
         {
@@ -27,13 +28,14 @@ namespace LD51
             LoadContent();
             this.playerAnimation = playerAnimation;
             this.pos = new Vector2(Settings.windowWidth/4, Settings.windowHeight/2);
+            seenWidth = 144;
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
                 characterSprite,
                 pos,
-                new Rectangle(this.playerAnimation.GetAnimationFrame() * 144, 0,144,76),
+                new Rectangle(this.playerAnimation.GetAnimationFrame() * seenWidth, 0, seenWidth, 76),
                 Color.White
             );
 
