@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "iJEzeojjDqS2bsGzZ9S8jFukboW5+2J5DNXy2/BZ3VdcmJod0InqInTsLd4UyKNoVYZi0TNcBCQDKvcOCR6CQg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\PerEr\\source\\repos\\LD51\\LD51\\LD51.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PerEr\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\PerEr\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
+  ],
+  "logs": []
+}
