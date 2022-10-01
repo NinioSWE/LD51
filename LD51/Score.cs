@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace LD51
 {
@@ -23,7 +24,7 @@ namespace LD51
 
         public void LoadContent()
         {
-            this.font = this.game.Content.Load<SpriteFont>("Minecraft");
+            this.font = this.game.Content.Load<SpriteFont>("Font");
         }
 
         public void Update(GameTime gameTime)
