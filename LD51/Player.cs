@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LD51
 {
@@ -15,6 +17,8 @@ namespace LD51
         private Vector2 velocity;
         private float maxVelocity = 300;
         private float movement = 60;
+        private List<Gift> gifts = new List<Gift>();
+        private bool isSpaceDown = false;
 
         public Player(MonoGameSetup game, PlayerAnimation playerAnimation)
         {
@@ -31,6 +35,11 @@ namespace LD51
                 new Rectangle(this.playerAnimation.GetAnimationFrame() * 144, 0,144,76),
                 Color.White
             );
+
+            foreach(Gift gift in gifts)
+            {
+                gift.Draw(gameTime, spriteBatch);
+            }
         }
 
         public void LoadContent()
@@ -45,6 +54,12 @@ namespace LD51
             this.playerAnimation.AnimateCharacter();
             this.MoveCharacter(state, deltaTime);
             this.KeepOnScreen();
+            this.DropGift(state);
+
+            foreach (Gift gift in gifts)
+            {
+                gift.Update(gameTime);
+            }
         }
 
         private void MoveCharacter(KeyboardState state, float deltaTime)
@@ -82,6 +97,26 @@ namespace LD51
         private void KeepOnScreen()
         {
             pos.Y = Math.Clamp(pos.Y, 0, Settings.windowHeight - this.characterSprite.Height);
+        }
+
+        private void DropGift(KeyboardState state)
+        {
+            
+            if (state.IsKeyDown(Keys.Space) && !isSpaceDown)
+            {
+                isSpaceDown = true;
+                var gift = new Gift(this.game, this.pos + new Vector2(32, 76));
+                this.gifts.Add(gift);
+            }
+            if (state.IsKeyUp(Keys.Space))
+            {
+                isSpaceDown = false;
+            }
+        }
+
+        private void removeGifts(KeyboardState state)
+        {
+            this.gifts.RemoveAll(x => x.pos.X <= 0);
         }
     }
 }
