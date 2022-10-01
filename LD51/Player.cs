@@ -19,13 +19,14 @@ namespace LD51
         private float movement = 60;
         private List<Gift> gifts = new List<Gift>();
         private bool isSpaceDown = false;
+        private Rectangle hitbox;
 
         public Player(MonoGameSetup game, PlayerAnimation playerAnimation)
         {
             this.game = game;
+            LoadContent();
             this.playerAnimation = playerAnimation;
             this.pos = new Vector2(Settings.windowWidth/4, Settings.windowHeight/2);
-            LoadContent();
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -60,6 +61,7 @@ namespace LD51
             {
                 gift.Update(gameTime);
             }
+            this.removeGifts();
         }
 
         private void MoveCharacter(KeyboardState state, float deltaTime)
@@ -114,9 +116,9 @@ namespace LD51
             }
         }
 
-        private void removeGifts(KeyboardState state)
+        private void removeGifts()
         {
-            this.gifts.RemoveAll(x => x.pos.X <= 0);
+            this.gifts.RemoveAll(x => x.pos.Y > Settings.windowHeight);
         }
     }
 }

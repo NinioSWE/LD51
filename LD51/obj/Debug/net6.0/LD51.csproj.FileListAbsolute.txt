@@ -27,3 +27,4 @@ C:\Users\PerEr\source\repos\LD51\LD51\bin\Debug\net6.0\Content\Player.xnb
 C:\Users\PerEr\source\repos\LD51\LD51\bin\Debug\net6.0\Content\StartButton.xnb
 C:\Users\PerEr\source\repos\LD51\LD51\bin\Debug\net6.0\Content\character.xnb
 C:\Users\PerEr\source\repos\LD51\LD51\bin\Debug\net6.0\Content\presents.xnb
+C:\Users\PerEr\source\repos\LD51\LD51\bin\Debug\net6.0\Content\airplane.xnb
