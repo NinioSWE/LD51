@@ -11,7 +11,7 @@ namespace LD51
         private Vector2 pos;
         private readonly int seenWidth = 256;
         private readonly int totalAnimationFrames = 6;
-        private readonly int numberOfFrames = 7;
+        private readonly int numberOfFrames = 5;
         private int tempTimer = 0;
         private int animationFrame = 0;
 
