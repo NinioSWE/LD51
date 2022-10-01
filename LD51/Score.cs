@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace LD51
 {
@@ -9,7 +8,7 @@ namespace LD51
         public int score = 0;
 
         private readonly MonoGameSetup game;
-        private readonly Texture2D scoreSprite;
+        private SpriteFont font;
 
         public Score(MonoGameSetup game)
         {
@@ -19,12 +18,12 @@ namespace LD51
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            //spriteBatch.DrawString(,playerScore.ToString(), new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(this.font, this.score.ToString(), new Vector2(5, 5), Color.White);
         }
 
         public void LoadContent()
         {
-            throw new NotImplementedException();
+            this.font = this.game.Content.Load<SpriteFont>("Minecraft");
         }
 
         public void Update(GameTime gameTime)

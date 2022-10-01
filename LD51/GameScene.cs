@@ -12,6 +12,7 @@ namespace LD51
     {
         private MonoGameSetup game;
         private Player player;
+        private Score score;
         private BackgroundStars backgroundStar;
         private List<Airplane> airplanes = new List<Airplane>();
         private float spawnTimer = 3;
@@ -21,6 +22,7 @@ namespace LD51
         {
             this.game = game;
             this.player = new Player(game, new PlayerAnimation());
+            this.score = new Score(game);
             this.backgroundStar = new BackgroundStars(game);
         }
 
@@ -33,6 +35,7 @@ namespace LD51
                 airplane.Draw(gameTime, spriteBatch);
             }
             player.Draw(gameTime, spriteBatch);
+            score.Draw(gameTime, spriteBatch);
         }
 
         public void LoadContent()
@@ -64,6 +67,7 @@ namespace LD51
             }
             this.removeAirplanes();
 
+            this.score.Update(gameTime);
         }
 
         private void spawnAirplane()
