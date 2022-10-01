@@ -38,8 +38,10 @@
 /build:character.png
 
 #begin Minecraft.ttf
-/importer:
-/processor:
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
 /build:Minecraft.ttf
 
 #begin presents.png
