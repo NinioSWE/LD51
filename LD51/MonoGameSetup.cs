@@ -15,6 +15,8 @@ namespace LD51
         private GameScene gameScene;
         public Texture2D hitboxSprite;
         public float speed = 300;
+        public Score score;
+
         public MonoGameSetup()
         {
             _graphics = new GraphicsDeviceManager(this);

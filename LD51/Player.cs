@@ -17,7 +17,7 @@ namespace LD51
         private Vector2 velocity;
         private float maxVelocity = 300;
         private float movement = 60;
-        private List<Gift> gifts = new List<Gift>();
+        public List<Gift> gifts = new List<Gift>();
         private bool isSpaceDown = false;
         public Rectangle hitbox;
         public int seenWidth;
@@ -55,7 +55,6 @@ namespace LD51
             {
                 this.explosion.Draw(gameTime, spriteBatch);
             }
-            spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
         }
 
         public void LoadContent()
@@ -151,7 +150,15 @@ namespace LD51
 
         private void removeGifts()
         {
-            this.gifts.RemoveAll(x => x.pos.Y > Settings.windowHeight);
+            this.gifts.RemoveAll(x => {
+                var outsideWindow = x.pos.Y > Settings.windowHeight;
+
+                if (outsideWindow)
+                {
+                    this.game.score.DeductPoints(500);
+                }
+                return outsideWindow;
+            });
         }
     }
 }

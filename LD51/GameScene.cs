@@ -11,7 +11,6 @@ namespace LD51
         private Random random = new Random();
         private MonoGameSetup game;
         private Player player;
-        private Score score;
         private BackgroundStars backgroundStar;
         private List<Airplane> airplanes = new List<Airplane>();
         private List<HouseBase> houses = new List<HouseBase>();
@@ -26,8 +25,8 @@ namespace LD51
             this.game = game;
             this.LoadContent();
             this.player = new Player(game, new PlayerAnimation());
-            this.score = new Score(game);
             this.backgroundStar = new BackgroundStars(game);
+            this.game.score = new Score(this.game);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(bgSong);
         }
@@ -46,7 +45,7 @@ namespace LD51
                 airplane.Draw(gameTime, spriteBatch);
             }
             player.Draw(gameTime, spriteBatch);
-            score.Draw(gameTime, spriteBatch);
+            this.game.score.Draw(gameTime, spriteBatch);
         }
 
         public void LoadContent()
@@ -83,6 +82,25 @@ namespace LD51
                     this.player.Die();
                 }
             }
+            List<Gift> tempRemovelist = new List<Gift>();
+            foreach (Gift gift in this.player.gifts)
+            {
+                gift.Update(gameTime);
+
+                foreach (HouseBase house in houses)
+                {
+                    if (gift.hitbox.Intersects(house.chimneyHitBox))
+                    {
+                        this.game.score.AddPoints(1000);
+                        tempRemovelist.Add(gift);
+                    }
+                }
+            }
+
+            foreach (var temp in tempRemovelist)
+            {
+                this.player.gifts.Remove(temp);
+            }
 
             if (spawnHouseTempTimer / 60 >= spawnhouseTimer)
             {
@@ -98,7 +116,7 @@ namespace LD51
             }
             this.removeObjectsOutOfScreen();
 
-            this.score.Update(gameTime);
+            this.game.score.Update(gameTime);
         }
 
         private void spawnAirplane()

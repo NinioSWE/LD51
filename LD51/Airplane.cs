@@ -41,8 +41,6 @@ namespace LD51
                 pos,
                 Color.White
             );
-
-            spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
         }
 
         public void LoadContent()

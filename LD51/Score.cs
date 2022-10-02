@@ -4,7 +4,7 @@ using System;
 
 namespace LD51
 {
-    internal class Score : GameObject
+    public class Score : GameObject
     {
         public int score = 0;
 
@@ -30,6 +30,16 @@ namespace LD51
         public void Update(GameTime gameTime)
         {
             this.score += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+
+        public void AddPoints(int points)
+        {
+            this.score += points;
+        }
+
+        public void DeductPoints(int points)
+        {
+            this.score -= points;
         }
     }
 }

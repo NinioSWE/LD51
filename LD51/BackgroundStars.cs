@@ -13,7 +13,7 @@ namespace LD51
         MonoGameSetup game;
         Point movement;
         Random random;
-        const int littleStarAmount = 60;
+        const int littleStarAmount = 30;
         Vector2[] littleStarPositions;
         Texture2D littleStar;
 

@@ -34,8 +34,6 @@ namespace LD51
                 new Rectangle(giftIndex * 20, 0, 20, 24),
                 Color.White
             );
-
-            //spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
         }
 
         public void LoadContent()
