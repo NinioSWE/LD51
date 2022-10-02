@@ -12,6 +12,7 @@ namespace LD51
         public Vector2 pos;
         private Vector2 velocity;
         private int speed;
+        private Rectangle hitbox;
 
         public Airplane(MonoGameSetup game)
         {

@@ -12,7 +12,7 @@ namespace LD51
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameScene gameScene;
-        
+        public Texture2D hitboxSprite;
         public MonoGameSetup()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -36,8 +36,8 @@ namespace LD51
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
+            this.hitboxSprite = this.Content.Load<Texture2D>("hitbox");
         }
 
         protected override void Update(GameTime gameTime)

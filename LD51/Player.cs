@@ -19,7 +19,7 @@ namespace LD51
         private float movement = 60;
         private List<Gift> gifts = new List<Gift>();
         private bool isSpaceDown = false;
-        private Rectangle hitbox;
+        public Rectangle hitbox;
         public int seenWidth;
         private Explosion explosion;
         private bool isAlive = true;
@@ -31,6 +31,7 @@ namespace LD51
             this.playerAnimation = playerAnimation;
             this.pos = new Vector2(Settings.windowWidth/4, Settings.windowHeight/2);
             seenWidth = 144;
+            hitbox = new Rectangle((int)pos.X, (int)pos.Y + 15, seenWidth, characterSprite.Height-30);
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -47,13 +48,14 @@ namespace LD51
                 {
                     gift.Draw(gameTime, spriteBatch);
                 }
+
             }
 
             if (this.explosion != null)
             {
                 this.explosion.Draw(gameTime, spriteBatch);
             }
-
+            spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
         }
 
         public void LoadContent()
@@ -77,6 +79,8 @@ namespace LD51
                     gift.Update(gameTime);
                 }
                 this.removeGifts();
+                hitbox.X = (int)pos.X;
+                hitbox.Y = (int)pos.Y+15;
             }
 
             if (this.explosion != null)

@@ -49,12 +49,11 @@ namespace LD51
             spawnTimer -= 0.0005F;
             spawnTempTimer++;
 
-            var playerHitBox = new Rectangle(this.player.pos.ToPoint(), new Vector2(this.player.seenWidth, this.player.characterSprite.Height).ToPoint());
             foreach (Airplane airplane in airplanes)
             {
                 airplane.Update(gameTime);
 
-                if (airplane.GetHitBox().Intersects(playerHitBox))
+                if (airplane.GetHitBox().Intersects(player.hitbox))
                 {
                     this.player.Die();
                 }
