@@ -21,7 +21,7 @@ namespace LD51
             this.pos = startPos;
             Random random = new Random();
             this.giftIndex = random.Next(3);
-            this.gravity = new Vector2(0, 600);
+            this.gravity = new Vector2(0, 1000);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

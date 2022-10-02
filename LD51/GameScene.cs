@@ -10,6 +10,7 @@ namespace LD51
 {
     public class GameScene : GameObject
     {
+        private Random random = new Random();
         private MonoGameSetup game;
         private Player player;
         private Score score;
@@ -17,6 +18,8 @@ namespace LD51
         private List<Airplane> airplanes = new List<Airplane>();
         private List<HouseBase> houses = new List<HouseBase>();
         private float spawnTimer = 3;
+        private float spawnhouseTimer = 1;
+        private float spawnHouseTempTimer = 0;
         private float spawnTempTimer = 0;
 
         public GameScene(MonoGameSetup game)
@@ -31,7 +34,7 @@ namespace LD51
         {
             backgroundStar.Draw(gameTime, spriteBatch);
 
-            foreach (GreenHouse house in houses)
+            foreach (HouseBase house in houses)
             {
                 house.Draw(gameTime, spriteBatch);
             }
@@ -54,9 +57,10 @@ namespace LD51
             player.Update(gameTime);
             spawnTimer -= 0.0005F;
             spawnTempTimer++;
+            spawnHouseTempTimer++;
             this.game.speed += 0.1F;
 
-            foreach (GreenHouse house in houses)
+            foreach (HouseBase house in houses)
             {
                 house.Update(gameTime);
             }
@@ -71,9 +75,11 @@ namespace LD51
                 }
             }
 
-            if (spawnTempTimer / 60 >= spawnTimer)
+            if (spawnHouseTempTimer / 60 >= spawnhouseTimer)
             {
+                spawnhouseTimer = (float)random.NextDouble() * (2 - 0) + 0.5F;
                 this.spawnHouse();
+                spawnHouseTempTimer = 0;
             }
 
             if (spawnTempTimer / 60 >= spawnTimer)
@@ -93,7 +99,15 @@ namespace LD51
 
         private void spawnHouse()
         {
-            this.houses.Add(new GreenHouse(this.game));
+            var houseIndex = this.random.Next(2);
+
+            if (houseIndex == 0)
+            {
+                this.houses.Add(new RedHouse(this.game));
+            } else
+            {
+                this.houses.Add(new GreenHouse(this.game));
+            }        
         }
 
         private void removeObjectsOutOfScreen()
