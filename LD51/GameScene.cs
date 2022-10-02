@@ -15,7 +15,7 @@ namespace LD51
         private Score score;
         private BackgroundStars backgroundStar;
         private List<Airplane> airplanes = new List<Airplane>();
-        private List<GreenHouse> houses = new List<GreenHouse>();
+        private List<HouseBase> houses = new List<HouseBase>();
         private float spawnTimer = 3;
         private float spawnTempTimer = 0;
 
