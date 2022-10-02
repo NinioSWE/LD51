@@ -22,6 +22,7 @@ namespace LD51
         private Rectangle hitbox;
         public int seenWidth;
         private Explosion explosion;
+        private bool isAlive = true;
 
         public Player(MonoGameSetup game, PlayerAnimation playerAnimation)
         {
@@ -33,16 +34,19 @@ namespace LD51
         }
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(
-                characterSprite,
-                pos,
-                new Rectangle(this.playerAnimation.GetAnimationFrame() * seenWidth, 0, seenWidth, 76),
-                Color.White
-            );
-
-            foreach(Gift gift in gifts)
+            if (isAlive)
             {
-                gift.Draw(gameTime, spriteBatch);
+                spriteBatch.Draw(
+                    characterSprite,
+                    pos,
+                    new Rectangle(this.playerAnimation.GetAnimationFrame() * seenWidth, 0, seenWidth, 76),
+                    Color.White
+                );
+
+                foreach (Gift gift in gifts)
+                {
+                    gift.Draw(gameTime, spriteBatch);
+                }
             }
 
             if (this.explosion != null)
@@ -59,27 +63,32 @@ namespace LD51
 
         public void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            this.playerAnimation.AnimateCharacter();
-            this.MoveCharacter(state, deltaTime);
-            this.KeepOnScreen();
-            this.DropGift(state);
+            if (isAlive)
+            {
+                KeyboardState state = Keyboard.GetState();
+                float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                this.playerAnimation.AnimateCharacter();
+                this.MoveCharacter(state, deltaTime);
+                this.KeepOnScreen();
+                this.DropGift(state);
+
+                foreach (Gift gift in gifts)
+                {
+                    gift.Update(gameTime);
+                }
+                this.removeGifts();
+            }
+
             if (this.explosion != null)
             {
                 this.explosion.Update(gameTime);
             }
-
-            foreach (Gift gift in gifts)
-            {
-                gift.Update(gameTime);
-            }
-            this.removeGifts();
         }
 
         public void Die()
         {
             if (this.explosion == null) {
+                this.isAlive = false;
                 this.explosion = new Explosion(this.game, new Vector2(this.pos.X + this.seenWidth / 2 - 128, this.pos.Y + this.characterSprite.Height / 2 - 128));
             }
         }

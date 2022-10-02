@@ -46,7 +46,7 @@ namespace LD51
         {
             backgroundStar.Update(gameTime);
             player.Update(gameTime);
-            spawnTimer -= 0.0001F;
+            spawnTimer -= 0.0005F;
             spawnTempTimer++;
 
             var playerHitBox = new Rectangle(this.player.pos.ToPoint(), new Vector2(this.player.seenWidth, this.player.characterSprite.Height).ToPoint());
