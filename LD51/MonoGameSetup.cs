@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using System.Diagnostics;
 
 namespace LD51
 {
@@ -12,7 +10,7 @@ namespace LD51
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private GameScene gameScene;
+        public GameScene gameScene;
         public Texture2D hitboxSprite;
         public float speed = 300;
         public Score score;
@@ -26,7 +24,6 @@ namespace LD51
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             Window.Title = Settings.windowTitle;
             _graphics.PreferredBackBufferWidth = Settings.windowWidth;
             _graphics.PreferredBackBufferHeight = Settings.windowHeight;
@@ -40,7 +37,6 @@ namespace LD51
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
             this.hitboxSprite = this.Content.Load<Texture2D>("hitbox");
         }
 
@@ -49,11 +45,17 @@ namespace LD51
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             if (isPlaying)
             {
                 gameScene.Update(gameTime);
+            }
+            else
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.R))
+                {
+                    gameScene = new GameScene(this);
+                    isPlaying = true;
+                }
             }
             base.Update(gameTime);
         }
@@ -62,7 +64,6 @@ namespace LD51
         {
             GraphicsDevice.Clear(new Color((byte)46,(byte)52,(byte)64));
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
             gameScene.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();

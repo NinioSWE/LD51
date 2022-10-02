@@ -91,7 +91,7 @@ namespace LD51
                 {
                     if (gift.hitbox.Intersects(house.chimneyHitBox))
                     {
-                        this.game.score.AddPoints(1000);
+                        this.game.score.AddPoints(1000, house.chimneyHitBox.Location.ToVector2());
                         tempRemovelist.Add(gift);
                     }
                 }

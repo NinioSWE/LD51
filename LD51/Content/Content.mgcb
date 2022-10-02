@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:airplane.png
 
+#begin big.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:big.spritefont
+
 #begin character.png
 /importer:TextureImporter
 /processor:TextureProcessor

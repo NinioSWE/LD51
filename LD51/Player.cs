@@ -150,13 +150,13 @@ namespace LD51
 
         private void removeGifts()
         {
-            this.gifts.RemoveAll(x => {
-                var outsideWindow = x.pos.Y > Settings.windowHeight;
+            this.gifts.RemoveAll(gift => {
+                var outsideWindow = gift.pos.Y > Settings.windowHeight;
 
                 if (outsideWindow)
                 {
-                    this.game.score.DeductPoints(500);
-                }
+                    this.game.score.DeductPoints(500, gift.pos);
+                } 
                 return outsideWindow;
             });
         }
