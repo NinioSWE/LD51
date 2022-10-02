@@ -23,7 +23,7 @@ namespace LD51
             Random random = new Random();
             this.giftIndex = random.Next(3);
             this.gravity = new Vector2(0, 1000);
-            this.hitbox = new Rectangle((int)pos.X + 3, (int)pos.Y + 23, 14, 2);
+            this.hitbox = new Rectangle((int)pos.X + 3, (int)pos.Y + 9, 14, 16);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -48,7 +48,7 @@ namespace LD51
             velocity += gravity * deltaTime;
 
             this.hitbox.X = (int)pos.X + 3;
-            this.hitbox.Y = (int)pos.Y + 23;
+            this.hitbox.Y = (int)pos.Y + 9;
         }
     }
 }
