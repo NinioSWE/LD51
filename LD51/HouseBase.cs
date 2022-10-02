@@ -12,6 +12,8 @@ namespace LD51
 
         public Vector2 pos;
         private Vector2 velocity;
+        public Rectangle hitbox;
+        public Rectangle hitbox2;
 
         public HouseBase(MonoGameSetup game, string fileName, int pixelHeightOffset)
         {
@@ -20,6 +22,8 @@ namespace LD51
             this.LoadContent();
             var random = new Random();
             this.pos = new Vector2(Settings.windowWidth, Settings.windowHeight - houseSprite.Height + random.Next(pixelHeightOffset));
+            hitbox = new Rectangle((int)pos.X, (int)pos.Y + houseSprite.Height / 2, houseSprite.Width, houseSprite.Height/2);
+            hitbox2 = new Rectangle((int)pos.X + houseSprite.Width / 2, (int)pos.Y, houseSprite.Width - 40, houseSprite.Height / 2 - 30);
         }
 
         public int GetWidth()
@@ -34,6 +38,9 @@ namespace LD51
                 pos,
                 Color.White
             );
+
+            spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
+            spriteBatch.Draw(this.game.hitboxSprite, hitbox2, Color.White);
         }
 
         public void LoadContent()
@@ -46,6 +53,12 @@ namespace LD51
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             velocity = new Vector2(-this.game.speed, 0);
             pos += velocity * deltaTime;
+
+            hitbox.X = (int)pos.X;
+            hitbox.Y = (int)pos.Y + houseSprite.Height / 2;
+
+            hitbox2.X = (int)pos.X + 20;
+            hitbox2.Y = (int)pos.Y +15;
         }
     }
 }

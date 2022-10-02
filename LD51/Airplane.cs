@@ -21,6 +21,7 @@ namespace LD51
             var random = new Random();
             this.pos = new Vector2(Settings.windowWidth, random.Next(Settings.windowHeight - airplaneSprite.Height));
             this.speed = this.game.speed + random.Next(200);
+            hitbox = new Rectangle((int)pos.X, (int)pos.Y+15, airplaneSprite.Width, airplaneSprite.Height-30);
         } 
 
         public int GetWidth()
@@ -30,8 +31,7 @@ namespace LD51
         
         public Rectangle GetHitBox()
         {
-            
-            return new Rectangle(pos.ToPoint(), new Vector2(airplaneSprite.Width, airplaneSprite.Height).ToPoint());
+            return hitbox;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -41,6 +41,8 @@ namespace LD51
                 pos,
                 Color.White
             );
+
+            spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
         }
 
         public void LoadContent()
@@ -53,6 +55,9 @@ namespace LD51
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             velocity = new Vector2(-this.speed, 0);
             pos += velocity * deltaTime;
+
+            hitbox.X = (int)pos.X;
+            hitbox.Y = (int)pos.Y + 15;
         }
     }
 }
