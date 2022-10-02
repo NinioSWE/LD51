@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LD51
 {
@@ -21,13 +19,17 @@ namespace LD51
         private float spawnhouseTimer = 1;
         private float spawnHouseTempTimer = 0;
         private float spawnTempTimer = 0;
+        private Song bgSong;
 
         public GameScene(MonoGameSetup game)
         {
             this.game = game;
+            this.LoadContent();
             this.player = new Player(game, new PlayerAnimation());
             this.score = new Score(game);
             this.backgroundStar = new BackgroundStars(game);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(bgSong);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -49,6 +51,7 @@ namespace LD51
 
         public void LoadContent()
         {
+           this.bgSong = this.game.Content.Load<Song>("christmas-piano");
         }
 
         public void Update(GameTime gameTime)
