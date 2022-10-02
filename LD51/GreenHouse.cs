@@ -4,40 +4,32 @@ using System;
 
 namespace LD51
 {
-    internal class Airplane : GameObject
+    public class GreenHouse : GameObject
     {
         private MonoGameSetup game;
-        private Texture2D airplaneSprite;
+        private Texture2D houseSprite;
 
         public Vector2 pos;
         private Vector2 velocity;
-        private float speed;
-        private Rectangle hitbox;
 
-        public Airplane(MonoGameSetup game)
+
+        public GreenHouse(MonoGameSetup game)
         {
             this.game = game;
             this.LoadContent();
             var random = new Random();
-            this.pos = new Vector2(Settings.windowWidth, random.Next(Settings.windowHeight - airplaneSprite.Height));
-            this.speed = this.game.speed + random.Next(200);
-        } 
+            this.pos = new Vector2(Settings.windowWidth, Settings.windowHeight - houseSprite.Height + random.Next(32));
+        }
 
         public int GetWidth()
         {
-            return airplaneSprite.Width;
-        }
-        
-        public Rectangle GetHitBox()
-        {
-            
-            return new Rectangle(pos.ToPoint(), new Vector2(airplaneSprite.Width, airplaneSprite.Height).ToPoint());
+            return houseSprite.Width;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                airplaneSprite,
+                houseSprite,
                 pos,
                 Color.White
             );
@@ -45,13 +37,13 @@ namespace LD51
 
         public void LoadContent()
         {
-            this.airplaneSprite = game.Content.Load<Texture2D>("airplane");
+            this.houseSprite = game.Content.Load<Texture2D>("green-house");
         }
 
         public void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            velocity = new Vector2(-this.speed, 0);
+            velocity = new Vector2(-this.game.speed, 0);
             pos += velocity * deltaTime;
         }
     }

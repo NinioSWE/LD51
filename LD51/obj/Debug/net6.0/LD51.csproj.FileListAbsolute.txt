@@ -61,3 +61,4 @@ C:\Users\PerEr\Documents\GitHub\LD51\LD51\obj\Debug\net6.0\ref\LD51.dll
 C:\Users\PerEr\Documents\GitHub\LD51\LD51\bin\Debug\net6.0\Content\Font.xnb
 C:\Users\PerEr\Documents\GitHub\LD51\LD51\bin\Debug\net6.0\Content\explosion4x.xnb
 C:\Users\PerEr\Documents\GitHub\LD51\LD51\bin\Debug\net6.0\Content\hitbox.xnb
+C:\Users\PerEr\Documents\GitHub\LD51\LD51\bin\Debug\net6.0\Content\green-house.xnb

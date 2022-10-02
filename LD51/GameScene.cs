@@ -15,6 +15,7 @@ namespace LD51
         private Score score;
         private BackgroundStars backgroundStar;
         private List<Airplane> airplanes = new List<Airplane>();
+        private List<GreenHouse> houses = new List<GreenHouse>();
         private float spawnTimer = 3;
         private float spawnTempTimer = 0;
 
@@ -29,6 +30,11 @@ namespace LD51
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             backgroundStar.Draw(gameTime, spriteBatch);
+
+            foreach (GreenHouse house in houses)
+            {
+                house.Draw(gameTime, spriteBatch);
+            }
 
             foreach (Airplane airplane in airplanes)
             {
@@ -48,6 +54,12 @@ namespace LD51
             player.Update(gameTime);
             spawnTimer -= 0.0005F;
             spawnTempTimer++;
+            this.game.speed += 0.1F;
+
+            foreach (GreenHouse house in houses)
+            {
+                house.Update(gameTime);
+            }
 
             foreach (Airplane airplane in airplanes)
             {
@@ -61,10 +73,15 @@ namespace LD51
 
             if (spawnTempTimer / 60 >= spawnTimer)
             {
+                this.spawnHouse();
+            }
+
+            if (spawnTempTimer / 60 >= spawnTimer)
+            {
                 this.spawnAirplane();
                 spawnTempTimer = 0;
             }
-            this.removeAirplanes();
+            this.removeObjectsOutOfScreen();
 
             this.score.Update(gameTime);
         }
@@ -74,9 +91,15 @@ namespace LD51
             this.airplanes.Add(new Airplane(this.game));
         }
 
-        private void removeAirplanes()
+        private void spawnHouse()
+        {
+            this.houses.Add(new GreenHouse(this.game));
+        }
+
+        private void removeObjectsOutOfScreen()
         {
             this.airplanes.RemoveAll(x => x.pos.X < 0 - x.GetWidth());
+            this.houses.RemoveAll(x => x.pos.X < 0 - x.GetWidth());
         }
     }
 }

@@ -13,6 +13,7 @@ namespace LD51
         private SpriteBatch _spriteBatch;
         private GameScene gameScene;
         public Texture2D hitboxSprite;
+        public float speed = 300;
         public MonoGameSetup()
         {
             _graphics = new GraphicsDeviceManager(this);
