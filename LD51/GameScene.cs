@@ -66,6 +66,12 @@ namespace LD51
             foreach (HouseBase house in houses)
             {
                 house.Update(gameTime);
+
+                if (house.hitbox.Intersects(player.hitbox) 
+                    || house.hitbox2.Intersects(player.hitbox))
+                {
+                    this.player.Die();
+                }
             }
 
             foreach (Airplane airplane in airplanes)

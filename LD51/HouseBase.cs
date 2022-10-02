@@ -6,7 +6,7 @@ namespace LD51
 {
     public abstract class HouseBase : GameObject
     {
-        private MonoGameSetup game;
+        internal MonoGameSetup game;
         private Texture2D houseSprite;
         private string fileName;
 
@@ -14,6 +14,7 @@ namespace LD51
         private Vector2 velocity;
         public Rectangle hitbox;
         public Rectangle hitbox2;
+        public Rectangle chimneyHitBox;
 
         public HouseBase(MonoGameSetup game, string fileName, int pixelHeightOffset)
         {
@@ -31,7 +32,7 @@ namespace LD51
             return houseSprite.Width;
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
                 houseSprite,
@@ -39,8 +40,8 @@ namespace LD51
                 Color.White
             );
 
-            spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
-            spriteBatch.Draw(this.game.hitboxSprite, hitbox2, Color.White);
+            //spriteBatch.Draw(this.game.hitboxSprite, hitbox, Color.White);
+            //spriteBatch.Draw(this.game.hitboxSprite, hitbox2, Color.White);
         }
 
         public void LoadContent()
@@ -48,7 +49,7 @@ namespace LD51
             this.houseSprite = game.Content.Load<Texture2D>(this.fileName);
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             velocity = new Vector2(-this.game.speed, 0);
